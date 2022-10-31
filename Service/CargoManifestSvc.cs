@@ -18,11 +18,11 @@ namespace FlightDocsSystem.Service
         public async Task<int> AddCargoManifestAsync(CargoManifest CargoManifests)
         {
             int ret = 0;
-                try
+            try
             {
                 await _context.AddAsync(CargoManifests);
                 await _context.SaveChangesAsync();
-                ret = CargoManifests.FlightId;
+                
             }
             catch (Exception ex)
             {
@@ -40,10 +40,12 @@ namespace FlightDocsSystem.Service
                 cargo = await GetCargoManifestAsync(CargoManifests.FlightId);
 
                 cargo.FlightNo = CargoManifests.FlightNo;
+                cargo.PointOfLoading = CargoManifests.PointOfLoading;
+                cargo.PointOfUnLoading = CargoManifests.PointOfUnLoading;
 
                 _context.Update(cargo);
                 await _context.SaveChangesAsync();
-                ret = CargoManifests.FlightId;
+                
             }
             catch (Exception ex)
             {

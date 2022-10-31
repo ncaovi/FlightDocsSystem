@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FlightDocsSystem.Migrations
 {
-    public partial class FlightDocsSystem : Migration
+    public partial class Flight : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

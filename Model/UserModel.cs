@@ -44,6 +44,7 @@ namespace FlightDocsSystem.Model
         public string Address { get; set; }
 
 
+
         [Column(TypeName = "varchar(50)"), MaxLength(50)]
         [DataType(DataType.Password)]
         public string UserPassword { get; set; }

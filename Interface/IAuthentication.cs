@@ -11,5 +11,9 @@ namespace FlightDocsSystem.Interface
         Task<UserModel> GetUserEmail(ViewLogin viewLogin);
         Task<int> ChangePassword(string email, UserModel userModel);
 
+        Task<UserModel> GetUser(ViewLogin viewLogin);
+
+        Task<int> ChangePasswordUser(string Tit, UserModel userModel);
+
     }
 }

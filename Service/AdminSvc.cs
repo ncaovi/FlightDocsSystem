@@ -13,9 +13,44 @@ namespace FlightDocsSystem.Service
     public class AdminSvc : IAdmin
     {
         protected DataContext _context;
-        public AdminSvc(DataContext context)
+        protected IEncode _enCode;
+        public AdminSvc(DataContext context, IEncode encode)
         {
             _context = context;
+            _enCode = encode;
+        }
+
+
+        public async Task<UserModel> GetUser(int id)
+        {
+            UserModel user = null;
+            user = await _context.UserModels.FindAsync(id);
+            return user;
+        }
+
+
+        public async Task<int> AddAdmin(UserModel userModel)
+        {
+            int ret = 0;
+            try
+            {
+                userModel.UserBlock = false;
+                userModel.UserPassword = _enCode.Encode(userModel.UserPassword);
+                userModel.IsDelete = true;
+                userModel.UserRole = 1;
+                var role = await _context.RoleModels.FindAsync(userModel.UserRole);
+
+                userModel.UserRoleName = role.RoleName;
+
+                await _context.AddAsync(userModel);
+                await _context.SaveChangesAsync();
+                ret = userModel.UserId;
+            }
+            catch (Exception ex)
+            {
+                ret = 0;
+            }
+            return ret;
         }
 
 
@@ -81,6 +116,8 @@ namespace FlightDocsSystem.Service
             return ret;
         }
         #endregion
+
+       
         public async Task<bool> AddUserAsync(UserModel users)
         {
             _context.Add(users);
@@ -97,8 +134,8 @@ namespace FlightDocsSystem.Service
 
         public async Task<List<UserModel>> GetUserAllAsync()
         {
-            var dataContext = _context.UserModels;
-            return await dataContext.ToListAsync();
+            var user = await _context.UserModels.Where(u => u.UserRole == 2).ToListAsync();
+            return user;
         }
 
         public async Task<UserModel> GetUserAsync(int? id)

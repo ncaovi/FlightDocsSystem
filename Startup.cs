@@ -72,6 +72,9 @@ namespace FlightDocsSystem
             services.AddTransient<IEncode, EncodeHelper>();
             services.AddTransient<IAuthentication, AuthenticationSvc>();
             services.AddTransient<IAdmin, AdminSvc>();
+            services.AddTransient<IDocumentList, DocumentListSvc>();
+            services.AddTransient<IGroupPermission, GroupPermissionSvc>();
+            services.AddTransient<ICargoManifest, CargoManifestSvc>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>

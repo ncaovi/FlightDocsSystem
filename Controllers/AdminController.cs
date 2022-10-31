@@ -152,9 +152,6 @@ namespace FlightDocsSystem.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-
-
-
             try
             {
                 await _user.EditUserAsync(id, User);
