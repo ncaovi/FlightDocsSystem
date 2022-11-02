@@ -42,20 +42,7 @@ namespace FlightDocsSystem.Service
             return users;
         }
 
-        public async Task<UserModel> GetUser(ViewLogin viewLogin)
-        {
-            UserModel user = null;
-            /*user = await _context.UserModels.FirstOrDefaultAsync(u => u.UserStudentCode == viewLogin.UserStudentCode);*/
-            return user;
-        }
-
-        public async Task<UserModel> GetUser(string Tit)
-        {
-            UserModel users = null;
-            users = await _context.UserModels.FirstOrDefaultAsync(u => u.Title == Tit);
-            return users;
-        }
-
+       
 
         public async Task<int> ChangePassword(string email, UserModel userModel)
         {
@@ -81,27 +68,6 @@ namespace FlightDocsSystem.Service
         }
 
 
-        public async Task<int> ChangePasswordUser(string Tit, UserModel userModel)
-        {
-            int ret = 0;
-            try
-            {
-
-                UserModel _user = null;
-                _user = await GetUser(Tit);
-
-
-                _user.UserPassword = _enCode.Encode(userModel.UserPassword);
-                _context.Update(_user);
-                await _context.SaveChangesAsync();
-
-                ret = userModel.UserId;
-            }
-            catch (Exception ex)
-            {
-                ret = 0;
-            }
-            return ret;
-        }
+        
     }
 }

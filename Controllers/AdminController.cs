@@ -15,6 +15,7 @@ namespace FlightDocsSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AdminController : ControllerBase
     {
         private readonly IAdmin _user;
@@ -140,7 +141,7 @@ namespace FlightDocsSystem.Controllers
             return await _user.GetUserAllAsync(); ;
         }
 
-        [HttpPut("ChangepassUser/{id}")]
+        [HttpPut("EditUser/{id}")]
         public async Task<IActionResult> PutUser(int id, UserModel User)
         {
             if (id != User.UserId)

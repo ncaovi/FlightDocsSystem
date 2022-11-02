@@ -15,7 +15,7 @@ namespace FlightDocsSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
 
     public class CargoManifestController : ControllerBase
     {

@@ -23,7 +23,7 @@ namespace FlightDocsSystem.Interface
         public Task<UserModel> GetUserAsync(int? id);
         Task<bool> isEmail(string email);
 
-        //public Task<bool> DeleteUserAsync(int id, User User);
+        //public Task<bool> DeleteUserAsync(int id, UserModel User);
         public Task<UserModel> Login(ViewLogin viewLogin);
         
         Task<int> ChangePasswordCode(string email, UserModel user);

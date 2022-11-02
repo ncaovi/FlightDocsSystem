@@ -15,7 +15,7 @@ namespace FlightDocsSystem.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
 
     public class DocumentListController : ControllerBase
     {
@@ -32,11 +32,11 @@ namespace FlightDocsSystem.Controllers
         {
             try
             {
-                await _document.AddDocumentListAsync(document);
+                var id = await _document.AddDocumentListAsync(document);
             }
             catch (Exception ex)
             {
-
+                return BadRequest(ex.Message);
             }
             return Ok(new
             {
